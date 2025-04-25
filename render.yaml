@@ -1,0 +1,30 @@
+services:
+  - name: uh-mattermost-ws-v2
+    type: web
+    env: docker
+    plan: free
+    region: oregon
+    # Utilizamos un Dockerfile personalizado
+    dockerfilePath: ./Dockerfile
+    # Puerto interno (Render redirige el tráfico externo a este puerto)
+    port: 8065
+    # Variables de entorno específicas de Mattermost
+    envVars:
+      - key: MM_SERVICESETTINGS_SITEURL
+        value: https://uh-mattermost-ws-v2.onrender.com
+      - key: MM_SQLSETTINGS_DRIVERNAME
+        value: postgres
+      - key: MM_SQLSETTINGS_DATASOURCE
+        # Render genera automáticamente esta variable si vinculas la DB
+        fromDatabase:
+          name: uh_mm_admin_v2
+          property: connectionString
+    # Health Check para monitorear el servicio
+    healthCheckPath: /api/v4/system/ping
+
+databases:
+  - name: uh_mm_admin_v2
+    plan: free
+    region: oregon
+    # Render genera automáticamente el usuario y contraseña
+    # ¡No los definas manualmente!
