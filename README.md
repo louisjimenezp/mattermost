@@ -36,7 +36,7 @@
 
 ```bash
 # For CLI lovers (using Render CLI):
-render blueprints create https://github.com/your-repo
+render blueprints create https://github.com/louisjimenezp/mattermost
 ```
 
 ## ⚙️ Customization
