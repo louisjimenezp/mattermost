@@ -6,10 +6,10 @@ services:
     region: oregon
     # Utilizamos un Dockerfile personalizado
     dockerfilePath: ./Dockerfile
-    # Puerto interno (Render redirige el tráfico externo a este puerto)
-    port: 8065
     # Variables de entorno específicas de Mattermost
     envVars:
+      - key: PORT # Render asigna este puerto automáticamente
+        value: 8065  # Mapea el puerto interno del contenedor
       - key: MM_SERVICESETTINGS_SITEURL
         value: https://uh-mattermost-ws-v2.onrender.com
       - key: MM_SQLSETTINGS_DRIVERNAME
